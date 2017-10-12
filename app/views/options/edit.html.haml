@@ -1,0 +1,13 @@
+.container-fluid{:id=>"form_new"}
+  .wrapper
+    .row{:class=>"row_header"}
+      .col-xs-6
+        .title
+          Edit New Option
+      .col-xs-6
+        %button{:type=>"button", :class => "close", "aria-label"=>"Close"}
+          %a{:href=>admin_customize_options_path}
+            %span{"aria-hidden"=>"true"}
+              &times;
+    .row{:class=>"row_content"}
+      = render 'form'

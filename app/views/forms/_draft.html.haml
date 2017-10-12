@@ -1,0 +1,42 @@
+%table.table#form_draft
+  %thead
+    %tr
+      %th
+        =t('draft.number')
+      %th
+        =t('draft.app')
+        = image_tag("arrow_both.png" , :class => "sort_both")
+        = image_tag("arrow_down.png" , :class => "sort_desc hidden")
+        = image_tag("arrow_up.png" , :class => "sort_asc hidden")
+      %th
+        =t('draft.last_modified')
+        = image_tag("arrow_both.png" , :class => "sort_both")
+        = image_tag("arrow_down.png" , :class => "sort_desc hidden")
+        = image_tag("arrow_up.png" , :class => "sort_asc hidden")
+      %th
+        =t('draft.name')
+        = image_tag("arrow_both.png" , :class => "sort_both")
+        = image_tag("arrow_down.png" , :class => "sort_desc hidden")
+        = image_tag("arrow_up.png" , :class => "sort_asc hidden")
+      %th
+  %tbody
+    - if user_signed_in?
+      - if @drafts.blank?
+      - else
+        - @drafts.each do |f|
+          %tr
+            %th
+              
+            %th
+              = link_to "#{current_user.jurnal_id}-#{f.id}",edit_form_path(f),:class=>"edit_link"
+              %br
+              .date
+                = f.updated_at.strftime('%d/%m/%Y %H:%M')
+            %th
+              = f.updated_at.strftime('%d %b %Y %H:%M')
+            %th
+              = f.form_name
+            %th
+              = link_to "X".html_safe, f, :method => :delete,data: {title: t('button.delete-title'), confirm: t('button.delete-confirm'), commit: t('button.delete'), cancel: t('button.cancel')}
+- if @drafts.blank? && @submitted.blank?
+  = link_to t('button.create_new_app'), new_form_path, :class => "btn btn-primary new_form_link", "data-turbolinks"=>"false"

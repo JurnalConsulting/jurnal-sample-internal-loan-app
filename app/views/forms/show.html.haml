@@ -1,0 +1,98 @@
+.container-fluid{:id=>"form_show"}
+  .wrapper
+    .row{:class=>"row_header"}
+      .title
+        = t('form.info.app')
+        = "#{ current_user.jurnal_id}-#{@form.user_id}-#{@form.id}"
+      .desc
+        = t('form.info.submit')
+        = @form.updated_at.strftime('%d %b %Y %H:%M')
+    .row{:class=>"row_content"}
+      .col-sm-12.col-md-6{:class=>"left_side"}
+        %h4
+          = t('form.info.form-1')
+        .row
+          .col-xs-4
+            = t('form.label.title')
+          .col-xs-8
+            = @form.form_title
+        .row
+          .col-xs-4
+            = t('form.label.name')
+          .col-xs-8
+            = @form.form_name
+        .row
+          .col-xs-4
+            = t('form.label.address')
+          .col-xs-8
+            = @form.form_address
+        .row
+          .col-xs-4
+            = t('form.label.city')
+          .col-xs-8
+            = @form.form_city
+        .row
+          .col-xs-4
+            = t('form.label.telephone')
+          .col-xs-8
+            = @form.form_telephone
+        .row
+          .col-xs-4
+            = t('form.label.email')
+          .col-xs-8
+            = @form.form_email
+        .row
+          .col-xs-4
+            = t('form.label.buss_dur')
+          .col-xs-8
+            = @form.form_bussiness_duration
+        .row
+          .col-xs-4
+            = t('form.label.buss_type')
+          .col-xs-8
+            = @form.form_bussiness_type
+        .row
+          .col-xs-4
+            = t('form.label.loan_amount')
+          .col-xs-8
+            = @form.form_loan_amount
+      .col-sm-12.col-md-6{:class=>"right_side"}
+        %h4
+          = t('form.info.form-2')
+        .row
+          .col-xs-4
+            = t('form.label.title')
+          .col-xs-8
+            = @form.form_friend_title
+        .row
+          .col-xs-4
+            = t('form.label.name')
+          .col-xs-8
+            = @form.form_friend_name
+        .row
+          .col-xs-4
+            = t('form.label.address')
+          .col-xs-8
+            = @form.form_friend_address
+        .row
+          .col-xs-4
+            = t('form.label.city')
+          .col-xs-8
+            = @form.form_friend_city
+        .row
+          .col-xs-4
+            = t('form.label.telephone')
+          .col-xs-8
+            = @form.form_friend_telephone
+        .row
+          .col-xs-4
+            = t('form.label.mobilephone')
+          .col-xs-8
+            = @form.form_friend_handphone
+        .row
+          .col-xs-4
+            = t('form.label.email')
+          .col-xs-8
+            = @form.form_friend_email
+    .row.row_last
+      = link_to t('form.button.close'), submitted_tab_path, :class => "btn btn-primary"

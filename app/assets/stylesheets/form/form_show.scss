@@ -1,0 +1,51 @@
+#form_show{
+  .wrapper{
+    .row_header{
+      padding-left: 30px;
+      border-bottom: 0;
+    }
+    .row_content{
+      color: $grey-dark;
+      background-color: $grey-normal;
+      padding: 30px;
+      .left_side{
+        border-right: 1px solid $grey-lightest;
+        padding-left: 0;
+        @include breakpoint(col_md){
+          border-right: 0;
+        }
+      }
+      .right_side{
+        @include breakpoint(col_md){
+          padding-left: 0;
+          padding-top: 15px;
+        }
+        h4{
+          @include breakpoint(col_md){
+            padding-top: 15px;
+          }
+        }
+      }
+      .left_side, .right_side{
+        .row{
+          margin-top: 15px;
+          & div:first-child{
+            color: $grey-lighter;
+          }
+          & div:last-child{
+            color: $grey-darker;
+          }
+        }
+        h4{
+          font-size: 18px;
+          font-family: $font-family--light;
+          padding-bottom: 15px;
+        }
+      }
+    }
+    .row_last{
+      text-align: right;
+      margin-top: 15px;
+    }
+  }
+}

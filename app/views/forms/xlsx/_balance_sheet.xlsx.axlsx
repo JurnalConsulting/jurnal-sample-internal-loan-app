@@ -1,0 +1,309 @@
+wb.styles do |s|
+  minus_num        = s.add_style :fg_color => "ff0000",:alignment=>{:horizontal=>:right}
+  align_right      = s.add_style :alignment=>{:horizontal=>:right}
+  two_dec_digits   = s.add_style :format_code => "#,##0.00", :alignment=>{:horizontal=>:right}
+  two_dec_digits_minus = s.add_style :format_code => "#,##0.00", :alignment=>{:horizontal=>:right}, :fg_color => "ff0000"
+
+  bold             = { b: true }
+  centered         = { alignment: { horizontal: :center } }
+  
+  wb.add_worksheet(name: t('excel.balance-sheet')) do |sheet|
+    sheet.add_row [
+      @jurnal_company_data["company"]["name"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      t('excel.balance-sheet'),
+      "","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["report_date"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["currency_format"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      t('excel.date'),
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][0]["period"],
+      "",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][1]["period"],
+      "",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][2]["period"]
+    ]
+    sheet.add_row [
+      t('excel.title-assets')
+    ]
+
+    sheet.add_row [
+      t('excel.current-assets')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [nil,check_for_class(c["data"][0]["balance"],minus_num, align_right),align_right ,check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right ,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right) , align_right ,check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right ,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.current-assets')}",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][0]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][1]["total"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][1]["total"],
+      
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][1]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][2]["total"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][0]["total"],minus_num, align_right), align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][1]["total"],minus_num, align_right), align_right , check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_assets"]["total"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.fixed-assets')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][2]["balance"],minus_num, align_right) ]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.fixed-assets')}",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][0]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][1]["total"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][1]["total"],
+
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][1]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][2]["total"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][0]["total"],minus_num, align_right), align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][1]["total"],minus_num, align_right),align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["fixed_assets"]["total"][2]["total"],minus_num, align_right)  ]
+
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.depreciate')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.depreciate')}",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][0]["total"],
+
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][0]["total"], 
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][1]["total"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][1]["total"],
+
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][1]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][2]["total"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][2]["total"]
+    ], style: [ nil,check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][0]["total"],minus_num, align_right),align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][0]["total"],minus_num, align_right),align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["depreciations"]["total"][0]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+    
+    sheet.add_row [
+      t('excel.others-asset')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["other_assets"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][2]["balance"],minus_num, align_right) ]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.others-asset')}",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][0]["income"],
+
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][0]["income"],@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][1]["income"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][1]["income"],
+
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][1]["income"],@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][2]["income"]),
+
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][2]["income"]
+    ], style: [ nil, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][0]["income"],minus_num, align_right),align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][0]["income"],minus_num, align_right),align_right, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["header"]["total_liability_and_equity"][0]["income"],minus_num, align_right) ]
+  
+
+    sheet.add_row [
+      t('excel.liability-modal')
+    ]
+
+    sheet.add_row [
+      t('excel.liability-short')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right), align_right, check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][2]["balance"],minus_num, align_right) ]
+      )
+      end
+
+    sheet.add_row [
+      t('excel.liability-long')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][1]["balance"],minus_num, align_right),align_right, check_for_class(c["data"][2]["balance"],minus_num, align_right) ]
+      )
+      end
+    
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.liability')}",
+      convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][0]["total"]),
+
+      check_percent_diff( (convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][0]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s ),
+
+      convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"]),
+
+      check_percent_diff( (convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"])).to_s ),
+
+      convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"])
+    ], :style=> [nil, ((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][0]["total"]) >0 ? two_dec_digits : two_dec_digits_minus )),align_right,((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"]) >0? two_dec_digits : two_dec_digits_minus )) ,align_right, ((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"]) >0 ? two_dec_digits : two_dec_digits_minus ))]
+    
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.equity')
+    ]
+    @jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [ 
+          if(c["number"]== '0')
+            " "
+          else
+            if(c["indent"]==0)
+              c["category"]["name"]
+            else
+              ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+            end
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [ nil, check_for_class(c["data"][0]["balance"],minus_num, align_right), nil, check_for_class(c["data"][1]["balance"],minus_num, align_right),nil,check_for_class(c["data"][2]["balance"],minus_num, align_right) ]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.equity')}",
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][0]["total"],
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][0]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]),
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"],
+      check_percent_diff(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"], @jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"]),
+      @jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][0]["total"],minus_num, align_right) , nil, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"],minus_num, align_right), nil, check_for_class(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.liability')} & #{t('excel.equity')}",
+      convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][0]["total"]),
+
+      check_percent_diff((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][0]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s),
+
+      convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"]),
+      
+      check_percent_diff((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"])).to_s),
+      
+      convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"]),
+    ], style: [nil, ((check_strip(check_percent_diff((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][0]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][0]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s)))? two_dec_digits_minus:two_dec_digits), nil, ((check_strip(check_percent_diff((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"])).to_s)))? two_dec_digits_minus:two_dec_digits), nil, ((check_strip(check_percent_diff((convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][1]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][1]["total"])).to_s,(convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["equity"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["current_liabilities"]["total"][2]["total"]) + convert_f(@jurnal_balance_sheet_last_3_month["balance_sheet"]["long_liabilities"]["total"][2]["total"])).to_s)))? two_dec_digits_minus:two_dec_digits)]
+
+    sheet.merge_cells("A1:F1")
+    sheet.add_style 'A1:E1', bold, centered
+    sheet.merge_cells("A2:F2")
+    sheet.add_style 'A2:F2', centered, sz: 20
+    sheet.merge_cells("A3:F3")
+    sheet.add_style 'A3:F3', centered
+    sheet.merge_cells("A4:F4")
+    sheet.add_style 'A4:F4', centered
+    sheet.add_style 'A5', centered
+    sheet.add_style 'B5', centered
+    sheet.add_style 'D5', centered
+    sheet.add_style 'F5', centered
+
+  end
+end

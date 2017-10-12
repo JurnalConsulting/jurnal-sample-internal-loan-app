@@ -1,0 +1,168 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+id:
+  login:
+    user  : "Enter As User"
+    admin : "Enter As Admin"
+  time:
+    formats:
+      long: "%d/%m/%Y %H:%M"
+  button:
+    new_app         : "+ Pengajuan Kredit"
+    create_new_app  : "Buat Pengajuan Kredit"
+    delete-title    : "Hapus Aplikasi"
+    delete-confirm  : "Lanjutkan untuk menghapus Aplikasi ini."
+    delete          : "Hapus"
+    cancel          : "Batal"
+  draft:
+    number        : "No"
+    app           : "Form Aplikasi"
+    last_modified : "Terakhir Diubah"
+    name          : "Nama"
+  submitted:
+    number        : "No"
+    app           : "Aplikasi"
+    last_submitted: "Tanggal Kirim"
+    name          : "Nama"
+  form:
+    info:
+      title : "E-form Program Pembiayaan Loan"
+      app   : "Aplikasi"
+      submit: "Submitted on"
+      form-1: "Informasi Pengguna Jurnal"
+      form-2: "Pihak Yang Dapat Dihubungi"
+      disclaimer: "*Disclaimer : Kami akan mengirimkan Laporan Keuangan Anda dalam 3 bulan terakhir kepada Pihak Loan"
+    button: 
+      close       : "Tutup"
+      submit      : "Submit"
+      draft       : "Simpan Draft"
+      saving      : "Menyimpan..."
+      loading     : "Memproses..."
+      agree       : "Setuju & Kirim"
+      cancel      : "<span class='glyphicon glyphicon glyphicon-arrow-left'></span> Kembali ke Halaman Utama"
+    label:
+      title       : "Sebutan*"
+      name        : "Nama*"
+      address     : "Alamat*"
+      city        : "Kota*"
+      telephone   : "Telepon*"
+      mobilephone : "Handphone*"
+      email       : "Email*"
+      buss_dur    : "Durasi Bisnis*"
+      buss_type   : "Jenis Bisnis*"
+      loan_amount : "Plafon Pinjaman*"
+    modal:
+      thankyou-1    : "Form Aplikasi Anda Berhasil Terkirim"
+      thankyou-2    : "Terima kasih atas kepercayaan Anda. Form Aplikasi Anda akan diterukan ke pihak Loan dan tim Loan akan segera menghubungi Anda dalam waktu maksimal 1 hari kerja."
+      title-draft   : "Kembali ke Menu Utama"
+      content-draft : "Apakah kamu ingin menyimpan perubahan untuk aplikasi ini?"
+      title         : "Jurnal | <span class='bold-text' style='font-size:21px'>Syarat & Ketentuan Penggunaan Add-on Loan</span>"
+      content       : "Anda akan menggunakan fitur add-on Bank Tabungan Pensiunan Nasional <span class='bold-text'>(“<em>add-on</em> Loan”)</span> yang disediakan melalui layanan utama dari PT Jurnal Consulting Indonesia <span class='bold-text'>(“Kami”; “Jurnal”). Silakan membaca Syarat & ketentuan Penggunaan Add-on Loan (“syarat & ketentuan”; “Perjanjian”) ini dengan seksama karena dapat berdampak kepada hak dan kewajiban Pengguna di bawah hukum.</span> Perjanjian ini mengikat dan mulai berlaku untuk Anda <span class='bold-text'>(“Anda”; “Pengguna”; “Pelanggan”)</span> saat Anda mulai menggunakan fitur add-on Loan yang disediakan oleh Jurnal.<br><br>
+
+        Dengan menggunakan add-on Loan ini, Anda (1) baik mewakili diri Anda sendiri atau sebagai perwakilan dari entitas yang Anda wakilkan, setuju untuk mengikatkan diri pada segala syarat dan ketentuan yang terdapat pada perjanjian ini; dan (2) menyatakan dan menjamin bahwa Anda secara nyata menyetujui untuk terikat pada Perjanjian ini.<br><br>
+
+        <span class='bold-text'>Jika Anda tidak menyetujui Syarat & ketentuan ini, ANDA dilarang mengakses dan/atau menggunakan add-on Loan ini. JURNAL berhak untuk melakukan penghentian, pembatasan, pemblokiran dan usaha-usaha perlindungan lainnya secara sepihak terhadap siapapun yang dinilai tidak memenuhi Syarat & Ketentuan Penggunaan add-on Loan ini.</span><br>
+
+        Akses atas fitur add-on Loan dibatasi hanya untuk Pelanggan yang memiliki akun dari Layanan utama Jurnal saja. Anda tidak diperbolehkan memperoleh atau berusaha memperoleh akses tidak sah ke fitur add-on Loan dengan cara melanggar hukum/ilegal dan/atau apapun yang tanpa izin penggunaan khusus oleh Jurnal. Pelanggaran terhadap ketentuan ini merupakan pelanggaran yang didasarkan pada hukum Indonesia dan/atau undang-undang dan peraturan yang berlaku sesuai domisili Jurnal.<br><br>
+
+        <span class='bold-text'>Jika Anda di bawah Pengampuan dan/atau tidak cakap hukum menurut undang-undang dan peraturan yang berlaku: </span>Anda harus memperoleh persetujuan dari orang tua dan/atau wali dan/atau pihak yang bertanggung jawab secara hukum kepada Anda, penerimaan atau persetujuan orang tua/wali terhadap Persyaratan Penggunaan ini beserta persetujuan mereka untuk mengambil tanggung jawab untuk: <br>
+          (i) tindakan Anda; <br>
+          (ii) biaya yang terkait dengan penggunaan setiap Layanan; dan <br>
+          (iii) penerimaan dan kepatuhan Anda sesuai dengan Syarat & Ketentuan Penggunaan ini. <br>
+          (iv) penggantian kerugian sesuai dengan penyelesaian masalah yang disepakati.<br><br>
+
+        <span class='bold-text'>Jika Anda tidak memiliki izin dari orang tua atau wali, Anda harus berhenti menggunakan /mengakses Platform dan berhenti menggunakan Layanan ini.<br>
+          A. PENGGUNAAN & AKSES FITUR ADD-ON Loan DI PLATFORM JURNAL<br>
+        </span>
+          1. Anda setuju untuk mematuhi setiap dan semua pedoman, pemberitahuan, aturan operasi dan kebijakan dan instruksi yang berkaitan dengan penggunaan fitur add-on Loan, serta setiap perubahan-nya, yang dikeluarkan oleh Kami, dari waktu ke waktu. Kami berhak untuk merevisi pedoman, pemberitahuan, aturan operasi, kebijakan dan instruksi sewaktu-waktu dan Anda dianggap mengetahui dan tunduk oleh setiap perubahan tersebut di atas setelah ada-nya pemberitahuan atau publikasi atas perubahan tersebut di platform milik Jurnal atau pemberitahuan melalui media lain.<br><br>
+          2. Kegiatan terlarang: Anda setuju dan TIDAK akan melakukan:<br>
+            (a) Berpura-pura sebagai orang lain/entitas, atau memberikan keterangan yang salah, atau mengaku sebagai orang lain atau kelompok tertentu; <br>
+            (b) Menggunakan fitur add-on Loan pada platform milik Jurnal untuk tujuan yang melanggar hukum (ilegal); <br>
+            (c) Berusaha untuk menggunakan fitur add-on dengan sengaja maupun tidak sengaja yang menyebabkan terganggunya pemanfaatan dan pemakaian platform milik Jurnal secara keseluruhan; <br>
+            (d) menggunakan fitur add-on Loan ini diluar dari aturan / kebijakan penggunaan setiap jaringan komputer yang terhubung, setiap standar Internet yang berlaku dan hukum yang berlaku lainnya. <br><br>
+          3. Jurnal tidak dapat dibebankan kerugian apapun terkait dengan kebenaran data yang anda masukkan saat anda menggunakan fitur add-on Loan pada platform milik Jurnal ini. Namun, Jurnal menjamin kerahasiaan segala informasi yang anda masukkan pada fitur add-on Loan tersebut dari pihak-pihak yang tidak terkait. <br><br>
+          4. Kami berhak, tetapi tidak berkewajiban untuk: <br>
+            (a) memantau, menyaring atau mengontrol setiap kegiatan yang dilangsungkan menggunakan fitur add-on Loan pada platform milik Jurnal. Atas kebijakan kami sendiri, kami dapat menyelidiki setiap pelanggaran terhadap syarat dan ketentuan yang tercantum di sini dan dapat mengambil tindakan apapun yang dianggap sesuai atau tepat; <br>
+            (b) mencegah atau membatasi akses Pelanggan terhadap fitur add-on Loan; <br>
+            (c) melaporkan kegiatan yang dicurigai sebagai pelanggaran terhadap hukum yang berlaku, undang-undang atau peraturan kepada pihak yang berwenang serta bekerja sama dengan pihak berwenang tersebut; dan/atau <br>
+            (d) meminta informasi dan data dari Anda sehubungan dengan penggunaan fitur add-on Loan pada platform milik Jurnal setiap saat, dan sebagai pelaksanaan hak kami jika Anda menolak untuk memberikan / mengungkapkan informasi / data tersebut, atau jika Anda memberikan informasi tidak akurat, menyesatkan, penipuan data dan/atau informasi atau jika kami memiliki alasan yang cukup mencurigai Anda telah menyediakan informasi tidak akurat, menyesatkan atau penipuan data dan/atau informasi. <br><br>
+          5. Penggunaan Anda atas fitur add-on Loan di platform milik Jurnal juga tunduk pada Kebijakan Privasi sebagaimana tercantum di <a href='https://jurnal.id/id/privacy' target='blank'>website Jurnal.</a><br><br>
+          6. Selain Syarat dan Ketentuan ini, penggunaan aspek-aspek tertentu dari add-on Loan, lebih komprehensif atau versi terbaru dari add-on Loan yang ditawarkan oleh kami, dapat dikenakan syarat dan ketentuan tambahan, yang akan berlaku sepenuhnya. <br><br>
+          <span class='bold-text'>B. TEKNIS PENGGUNAAN FITUR ADD-ON Loan</span><br><br>
+            1. Anda diharuskan untuk mengisi data-data yang dibutuhkan sebagaimana ditampilkan pada fitur add-on Loan untuk dapat mengajukan permohonan kredit pada Loan melalui platform milik Jurnal ini.<br><br>
+            2. Setelah data yang dibutuhkan telah anda submit melalui add-on Loan pada platform Jurnal, maka setelahnya proses pengajuan kredit kepada Loan akan diambil alih oleh pihak Loan yang akan melakukan verifikasi terhadap permohonan yang anda ajukan dan akan melakukan follow-up kepada anda terkait dengan permohonnan yang anda ajukan menggunakan fitur add-on Loan yang tersedia di platform Jurnal.<br><br>
+            3. Loan adalah pihak yang berwenang untuk menentukan apakah pengajuan kredit yang anda ajukan melalui add-on Loan yang tersedia di platform milik Jurnal akan diterima atau tidak. Jurnal tidak bertanggung jawab dalam hal apa pun terkait dengan penerimaan atau penolakan dari permohonan yang anda ajukan menggunakan fitur add-on Loan. <br><br>
+          <span class='bold-text'>C. HAK-HAK TERKAIT</span><br><br>
+            1. Loan berhak untuk mengambil tindakan tertentu menurut kebijakan mereka dirasa perlu terhadap anda jika ternyata ditemukan adanya informasi yang tidak benar yang anda berikan berkaitan dengan permohonan pengajuan kredit yang anda buat menggunakan fitur add-on Loan yang tersedia di platform milik Jurnal. Jurnal tidak akan turut bertanggung jawab atas hal sebagaimana dimaksud dalam pasal ini dan seluruh tanggung jawab akan dibebankan seluruhnya kepada anda.<br><br>
+            2. Jurnal juga berhak untuk melakukan segala tindakan yang diperlukan terhadap anda jika anda terbukti melakukan tindakan melawan hukum (ilegal) dalam mendapatkan akses terhadap penggunaan add-on Loan yang terdapat pada platform milik Jurnal, baik penggunaan ilegal tersebut berdampak terhadal sistem Jurnal secara keseluruhan ataupun tidak.<br><br>
+            3. Anda memiliki hak untuk mengajukan komplain kepada tim support Jurnal jika fitur add-on Loan pada platform Jurnal tidak berfungsi dengan sebagaimana mestinya, dengan melalui e-mail ke alamat e-mail tim support Jurnal yaitu <a href='mailto:support@jurnal.id'>support@jurnal.id</a> atau melalui telepon di nomor <a href='tel://+622129025471'>+622129025471</a><br><br>
+            <span class='bold-text'>D. KEKAYAAN INTELEKTUAL</span><br><br>
+              1. Yang dimaksud dengan <span class='bold-text'>“Kekayaan Intelektual”</span> dalam Syarat dan Ketentuan ini adalah semua hak cipta, paten, inovasi utilitas, merek dagang dan merek layanan, indikasi geografis, nama domain, hak desain tata letak, desain terdaftar, hak desain, hak database, nama dagang atau bisnis, hak melindungi rahasia dagang dan rahasia informasi, hak melindungi itikad baik dan reputasi, dan semua hak kepemilikan yang sama atau terkait lainnya dan semua aplikasi yang sama, baik saat ada atau dibuat di masa depan, di mana saja di dunia, apakah terdaftar atau tidak, dan semua manfaat, hak istimewa, hak untuk menuntut, memulihkan kerusakan dan mendapatkan bantuan atau solusi lainnya untuk , pelanggaran yang terjadi di masa sekarang atau masa depan atau masa yang lampau, penyalahgunaan atau pelanggaran hak-hak tersebut di atas.<br><br>
+              2. Kekayaan Intelektual di dalam atau menuju kepada platform merupakan milik, berlisensi atau dikuasai oleh kami, atau pemberi lisensi kami atau penyedia layanan kami. Kami berhak untuk menjaga Kekayaan Intelektual sepenuhnya demi hukum. Segala bentuk logo dan merek yang berkaitan dengan Loan yang terdapat pada add-on Loan adalah milik PT Bank Tabungan Pensiunan Nasional, Tbk. secara utuh dan keseluruhan.<br><br>
+              3. Tidak ada bagian-bagian dari platform (termasuk add-on Loan) yang dapat direproduksi, direkayasa, dipisah dari susunan (decompiled), dibongkar, dipisahkan, diubah, didistribusikan, di-publish ulang (republished), ditampilkan, disiarkan, ditautkan (hyperlinked), direfleksikan (mirrored), disusun (framed), ditransfer atau dikirim dengan cara apapun atau disimpan/dipasang dalam suatu sistem pencarian informasi atau dipasang pada suatu server, sistem atau peralatan, tanpa izin tertulis sebelumnya dari kami atau dari pemilik hak cipta yang bersangkutan. Sesuai dengan Syarat dan Ketentuan ini, izin hanya akan diberikan kepada Anda untuk mengunduh, mencetak atau menggunakan platform untuk penggunaan pribadi dan nonkomersial, dengan ketentuan Anda tidak mengubah bagian apapun dari platform, serta kami atau pemilik Hak Cipta yang bersangkutan adalah pemegang semua/tiap Hak Cipta dan Hak Cipta kepemilikan lainnya yang terkandung pada platform.<br><br>
+              4. Tidak ada pada platform (termasuk add-on Loan) dan Syarat & Ketentuan ini yang bisa ditafsirkan sebagai pemberian, secara tersirat atau tidak, atau di tafsirkan sebagai lisensi atau hak untuk menggunakan (termasuk atas meta tag atau 'hot' link ke website lain) setiap merek dagang yang ditampilkan pada layanan, tanpa izin tertulis dari kami atau pemilik merek dagang lain yang berlaku.<br><br>"
+  excel:
+    form           : "Pengajuan E-Form Loan"
+    balance-sheet  : "Neraca"
+    date           : "Tanggal"
+    title-assets   : "Aset"
+    current-assets : "Aset Lancar"
+    total          : "Jumlah"
+    fixed-assets   : "Aset Tetap"
+    depreciate     : "Depresiasi & Amortisasi"
+    others-asset   : "Aset Lain"
+    others         : "Lain-lain"
+    liability      : "Liabilitas"
+    liability-modal: "Liabilitas & Modal"
+    liability-short: "Liabilitas Jangka Pendek"
+    liability-long : "Liabilitas Jangka Panjang"
+    equity         : "Modal"
+    profit-loss    : "Laba Rugi"
+    title-primary-income  : "Pendapatan"
+    primary-income : "Pendapatan dari Penjualan"
+    cost-sales     : "Harga Pokok Penjualan"
+    gross-profit   : "Laba Kotor"
+    operational-expense : "Biaya Operasional"
+    net-operate-income : "Pendapatan Bersih Operasional"
+    net-income : "Pendapatan Bersih"
+    net-total : "Total Pendapatan Komprehensif untuk periode ini"
+    other-income : "Pendapatan Lainnya"
+    other-expense : "Biaya Lainnya"
+    cash-flow : "Arus Kas"
+    income : "Pendapatan"
+    operate-income: "Total Pendapatan Operasional"
+    operate-act: "Aktivitas Operasional"
+    operate-exp: "Biaya Operasional"
+    less-expense: "Dikurang Biaya"
+    non-opr: "Aktivitas Non Operasional"
+    others: "Lainnya"
+    net-cash-move : "Perpindahan Kas Bersih"
+    summary : "Ringkasan"
+    open-balance: "Saldo Pembukaan"
+    net-cash-reval: "Revaluasi Bank"
+    closing-balance: "Saldo Penutupan"
+    number: "No"
+    transc: "Transaksi"
+    curr: "Mata Uang"
+    status: "Status"
+    memo: "Keterangan"
+    balance: "Sisa Tagihan"

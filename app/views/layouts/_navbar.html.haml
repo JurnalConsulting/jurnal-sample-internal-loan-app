@@ -1,0 +1,16 @@
+/ -flash.each do |name, msg|
+/   = content_tag :div, msg, class: [:alert, alert_for(name)]
+
+- if user_signed_in?
+  .response.hidden
+  .current.hidden
+    = current_user.access_token
+  %br
+  = link_to "Logout", destroy_user_session_path,  method: :delete, :class=>"logout_url hidden"
+/ - else
+/   %br
+/   = link_to "Sign Up", new_user_registration_path
+/   %br
+/   = link_to "Login", new_user_session_path  
+/   %br
+

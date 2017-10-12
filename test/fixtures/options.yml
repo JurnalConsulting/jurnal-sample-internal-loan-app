@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  opt_title: MyString
+  opt_city: MyString
+  opt_buss_dur: MyString
+  opt_buss_type: MyString
+  opt_buss_desc: MyString
+  opt_loan: MyString
+
+two:
+  opt_title: MyString
+  opt_city: MyString
+  opt_buss_dur: MyString
+  opt_buss_type: MyString
+  opt_buss_desc: MyString
+  opt_loan: MyString

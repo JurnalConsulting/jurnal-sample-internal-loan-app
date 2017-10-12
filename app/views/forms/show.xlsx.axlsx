@@ -1,0 +1,6 @@
+wb = xlsx_package.workbook
+  render :partial => "forms/xlsx/form", :locals => {:wb => wb}
+  render :partial => "forms/xlsx/balance_sheet", :locals => {:wb => wb}
+  render :partial => "forms/xlsx/profit_loss", :locals => {:wb => wb}
+  render :partial => "forms/xlsx/cash_flow", :locals => {:wb => wb}
+  render :partial => "forms/xlsx/sales_list", :locals => {:wb => wb}

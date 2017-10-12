@@ -1,0 +1,74 @@
+= simple_form_for @form , html: {class: 'form-horizontal', id: 'form'}, wrapper: :horizontal_form do |f|
+  %h3
+    = t('form.info.form-1')
+  %section{"data-step"=>"0"}
+    .title
+      = t('form.info.form-1')
+    = f.input :form_title, :label => t('form.label.title'), collection: Option.pluck( I18n.locale==:id ? :opt_title_id : :opt_title).compact.reject(&:empty?) ,:input_html => { :class => 'required select2_title'}
+    = f.input :form_name, :label => t('form.label.name') , :input_html => {:class=>"required", :placeholder=>"John Doe"}
+    - if !@jurnal_curr_company.nil?
+      .pre_form_name.hidden
+        = @jurnal_curr_company["current_user"]["full_name"]
+    = f.input :form_address, as: :string, :label => t('form.label.address') , :input_html => {:class=>"required", :placeholder=>"Jalan Raya Daan Mogot KM 10 Blok A. No. 1, Daan Mogot, Jakarta Barat, Indonesia"}
+    = f.input :form_city, :label => t('form.label.city'), collection: Option.pluck(:opt_cities).compact.reject(&:empty?) ,:input_html => { :class => 'required'}
+    = f.input :form_telephone, :label => t('form.label.telephone') , :input_html => { :class=>"required", :type=>"tel", :placeholder=>"+6221 2902 5364"}
+    = f.input :form_email, :label => t('form.label.email') , :input_html => {:class=>"required", :placeholder=>"support@jurnal.id"}
+    = f.input :form_bussiness_duration, :label => t('form.label.buss_dur'), collection: Option.pluck( I18n.locale==:id ? :opt_buss_dur_id : :opt_buss_dur ).compact.reject(&:empty?) ,:input_html => { :class => 'required'}
+    = f.input :form_bussiness_type, :label => t('form.label.buss_type'), collection: Option.pluck(:opt_buss_type).compact.reject(&:empty?) ,:input_html => { :class => 'required'}, :selected => (!@jurnal_company_data.nil? ? @jurnal_company_data["company"]["industry"] : '')
+    = f.input :form_loan_amount, :label => t('form.label.loan_amount'), collection: Option.pluck( I18n.locale==:id ? :opt_loan_id: :opt_loan ) .compact.reject(&:empty?),:input_html => { :class => 'required'}
+    - if !@jurnal_company_data.nil?
+      .pre_form_address.hidden
+        = @jurnal_company_data["company"]["address"]
+      .pre_form_telephone.hidden
+        = @jurnal_company_data["company"]["phone"]
+      .pre_form_email.hidden
+        = @jurnal_company_data["company"]["company_email"]
+      .pre_form_buss_type.hidden
+        = @jurnal_company_data["company"]["industry"]   
+    
+  %h3
+    = t('form.info.form-2')
+  %section{"data-step"=>"1"}
+    .title
+      = t('form.info.form-2')
+    = f.input :form_friend_title, :label => t('form.label.title'), collection: Option.pluck( I18n.locale==:id ? :opt_title_id : :opt_title).compact.reject(&:empty?),:input_html => { :class => 'required select2_title'}
+    = f.input :form_friend_name, :label => t('form.label.name') , :input_html => {:class=>"required", :placeholder=>"John Doe"}
+    = f.input :form_friend_address,as: :string, :label => t('form.label.address') , :input_html => {:class=>"required",:rows => 1,:placeholder=>"Jalan Raya Daan Mogot KM 10 Blok A. No. 1, Daan Mogot, Jakarta Barat, Indonesia"}
+    = f.input :form_friend_city, :label => t('form.label.city'), collection: Option.pluck(:opt_cities).compact.reject(&:empty?),:input_html => { :class => 'required'}
+    = f.input :form_friend_telephone, :label => t('form.label.telephone') , :input_html => { :class=>"required", :type=>"tel", :placeholder=>"+6221 2902 5364"}
+    = f.input :form_friend_handphone, :label => t('form.label.mobilephone') , :input_html => { :class=>"required", :type=>"tel", :placeholder=>"0821 1234 567"}
+    = f.input :form_friend_email, :label => t('form.label.email') , :input_html => {:class=>"required", :placeholder=>"support@jurnal.id"}
+    = f.input :form_disclaimer, as: :boolean, :inline_label=>t('form.info.disclaimer')
+    = f.submit :button, :value => t('form.button.draft'), :name => "draft_btn", :class=>"btn draft_btn",data: { disable_with: t('form.button.saving') }
+    = f.submit :button, :value => t('form.button.agree'), :name => "submit_btn", :class=>"btn submit_btn hidden", :id=>"submit_btn",data: { disable_with: t('form.button.saving') }
+    %button{:type => "button", :class=>"btn submit_modal_btn"}
+      = t('form.button.submit')
+    = link_to t('form.button.cancel').html_safe, root_path, :class=>"home_btn"
+
+#termModal.modal.fade{:role => "dialog"}
+  .modal-dialog
+    / Modal Terms&Condition
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+        .modal-title
+          = t('form.modal.title').html_safe
+      .modal-body
+        %p{:class=>"term-content"}
+          = t('form.modal.content').html_safe
+      .modal-footer
+        %button.btn-primary{:class=>"btn submit_btn_dummy"}
+          = t('form.button.agree')
+
+#infoModal.modal.fade{:role => "dialog"}
+  .modal-dialog
+    / Modal Thankyou after Terms
+    .modal-content
+      .modal-header
+        .modal-title
+          = t('form.modal.thankyou-1').html_safe
+        .modal-desc
+          = t('form.modal.thankyou-2').html_safe
+        %br
+        %a.btn.btn-primary{:class=>"btn", :href=>submitted_tab_url,"data-dismiss"=>"modal"}
+          OK

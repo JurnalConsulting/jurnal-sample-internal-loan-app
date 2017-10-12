@@ -1,0 +1,2 @@
+class FormSelect < ApplicationRecord
+end

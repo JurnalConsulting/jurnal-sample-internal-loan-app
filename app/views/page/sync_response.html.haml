@@ -1,0 +1,6 @@
+%div.response.hidden
+.container.sync_response.hidden
+  .wrapper.text-center
+    .div
+      = link_to t('login.user'), sync_response_path(:access_token => ""), :class => "sync_url btn btn-primary hidden"
+.loader

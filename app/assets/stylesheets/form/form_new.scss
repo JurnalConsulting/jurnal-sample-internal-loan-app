@@ -1,0 +1,22 @@
+#form_new{
+  .wrapper{
+    .row_header{
+      display: flex;
+      @include breakpoint(mobile){
+        justify-content: center;
+      }
+      .right-side{
+        text-align: right;
+        align-self: flex-end;
+        padding-right: 0;
+        @include breakpoint(mobile){
+          display: none;
+        }
+      }
+      .left-side{
+        text-align: left;
+        padding-left: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+#page_home{
+  .new_form_link{
+    font-size: 12px;
+    font-family: $font-family--book;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .wrapper{
+    .row{
+      &.row_mobile{
+        display: none;
+        margin: 0;
+        padding-bottom: 20px;
+        @include breakpoint(mobile){
+          display: block;
+        }
+        div{
+          @include breakpoint(mobile){
+            padding: 0;
+          }
+          a{
+            width: 100%;
+          }
+        }
+      }
+      //Row Content
+      &.row_content{
+        width: 100%;
+        height: 450px;
+        display: flex;
+        .left_side{
+          width: 400px;
+          img{
+            width: 100%;
+          }
+        }
+        .right_side{
+          flex-grow: 1;
+          padding-left: 20px;
+          position: relative;
+          width: 60%;
+          @include breakpoint(mobile){
+            padding-left: 0;
+          }
+        }
+        .row_img, .row_tab{
+          height: 100%;
+        }
+        .row_img{
+          @include breakpoint(mobile){
+            display: none;
+          }
+        }
+        .row_tab{
+          .plus_lg{
+            display: inline;
+            @include breakpoint(mobile){
+              display: none;
+            }
+          }
+          .plus_sm{
+            display: none;
+            @include breakpoint(mobile){
+              display: inline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Tab Setting
+  .nav-item{
+    width: 100px;
+    text-align: center;
+    a{
+      color: $grey-light;
+    }
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color: $orange-dark ;
+    font-size: 12px;
+    font-family: $font-family--bold;
+  }
+
+  .nav-tabs > li > a{
+    border-radius: 3px 3px 0px 0;
+    font-size: 12px;
+    font-family: $font-family--book;
+  }
+}
+

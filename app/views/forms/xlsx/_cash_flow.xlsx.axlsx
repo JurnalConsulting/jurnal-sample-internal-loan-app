@@ -1,0 +1,239 @@
+wb.styles do |s|
+  wb.add_worksheet(name: t('excel.cash-flow') ) do |sheet|
+    minus_num        = s.add_style :fg_color => "ff0000",:alignment=>{:horizontal=>:right}
+    align_right      = s.add_style :alignment=>{:horizontal=>:right}
+    two_dec_digits   = s.add_style :format_code => "#,##0.00", :alignment=>{:horizontal=>:right}
+    two_dec_digits_minus = s.add_style :format_code => "#,##0.00", :alignment=>{:horizontal=>:right}, :fg_color => "ff0000"
+
+    bold             = { b: true }
+    centered         = { alignment: { horizontal: :center } }
+
+    sheet.add_row [
+      @jurnal_company_data["company"]["name"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      t('excel.cash-flow'),
+      "","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_cash_flow_last_3_month["cash_flow"]["header"]["start_date"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_cash_flow_last_3_month["cash_flow"]["header"]["currency"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      t('excel.date'),
+      @jurnal_cash_flow_last_3_month["cash_flow"]["period"][0]["period"],
+      "",
+      @jurnal_cash_flow_last_3_month["cash_flow"]["period"][1]["period"],
+      "",
+      @jurnal_cash_flow_last_3_month["cash_flow"]["period"][2]["period"]
+    ] 
+
+    sheet.add_row [
+      t('excel.operate-act')
+    ]
+
+    sheet.add_row [
+      t('excel.income')
+    ]
+    @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["income"].each do |c|
+      sheet.add_row(
+        [
+          if(c["account"]["indent"]==0)
+            c["account"]["category"]["name"]
+          else
+            ("  " * c["account"]["indent"]).to_s + c["account"]["category"]["name"].to_s
+          end ,
+          c["account"]["balance"][0]["balance"],
+          check_percent_diff(c["account"]["balance"][0]["balance"],c["account"]["balance"][1]["balance"]),
+          c["account"]["balance"][1]["balance"],
+          check_percent_diff(c["account"]["balance"][1]["balance"],c["account"]["balance"][2]["balance"]),
+          c["account"]["balance"][2]["balance"]
+        ], style: [nil,check_for_class(c["account"]["balance"][0]["balance"],minus_num, align_right),nil,check_for_class(c["account"]["balance"][1]["balance"],minus_num, align_right),nil,check_for_class(c["account"]["balance"][1]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.operate-income')}",
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][0]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][1]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_income"][2]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.less-expense')
+    ]
+    @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["expense"].each do |c|
+      sheet.add_row(
+        [
+          if(c["account"]["indent"]==0)
+            c["account"]["category"]["name"]
+          else
+            ("  " * c["account"]["indent"]).to_s + c["account"]["category"]["name"].to_s
+          end ,
+          c["account"]["balance"][0]["balance"],
+          check_percent_diff(c["account"]["balance"][0]["balance"],c["account"]["balance"][1]["balance"]),
+          c["account"]["balance"][1]["balance"],
+          check_percent_diff(c["account"]["balance"][1]["balance"],c["account"]["balance"][2]["balance"]),
+          c["account"]["balance"][2]["balance"]
+        ], style: [nil,check_for_class(c["account"]["balance"][0]["balance"],minus_num, align_right),nil,check_for_class(c["account"]["balance"][1]["balance"],minus_num, align_right),nil,check_for_class(c["account"]["balance"][1]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.operate-exp')}",
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][0]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][1]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_expense"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.operate-act')}",
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][0]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][1]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["operating_activities"]["total_operating_activities"][2]["total"],minus_num, align_right) ]
+      sheet.add_row
+
+    sheet.add_row [
+      t('excel.non-opr')
+    ]
+    
+    sheet.add_row [
+      t('excel.others')
+    ]
+    @jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["other"].each do |c|
+      sheet.add_row(
+        [
+          if(c["account"]["indent"]==0)
+            c["account"]["category"]["name"]
+          else
+            ("  " * c["account"]["indent"]).to_s + c["account"]["category"]["name"].to_s
+          end ,
+          c["account"]["balance"][0]["balance"],
+          check_percent_diff(c["account"]["balance"][0]["balance"],c["account"]["balance"][1]["balance"]),
+          c["account"]["balance"][1]["balance"],
+          check_percent_diff(c["account"]["balance"][1]["balance"],c["account"]["balance"][2]["balance"]),
+          c["account"]["balance"][2]["balance"]
+        ], style: [nil,check_for_class(c["account"]["balance"][0]["balance"],minus_num, align_right),nil,check_for_class(c["account"]["balance"][1]["balance"],minus_num, align_right),nil,check_for_class(c["account"]["balance"][1]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.operate-exp')}",
+      @jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][0]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][1]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["non_operating_activities"]["total_non_operating_activities"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      t('excel.net-cash-move'),
+      @jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][0]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][1]["total"],
+      
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["net_cash_movement"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      t('excel.summary')
+    ]
+
+    sheet.add_row [
+      t('excel.open-balance'),
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][0]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][1]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][2]["total"]
+    ], style: [nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][0]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][1]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["opening_balance"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      t('excel.net-cash-move'),
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][0]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][1]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][2]["total"]
+    ], style: [nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][0]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][1]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_cash_movement"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      t('excel.net-cash-reval'),
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][0]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][1]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][2]["total"]
+    ], style: [nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][0]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][1]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["net_bank_revaluation"][2]["total"],minus_num, align_right) ]
+
+    sheet.add_row [
+      t('excel.closing-balance'),
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][0]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][0]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][1]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][1]["total"],
+
+      check_percent_diff(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][1]["total"], @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][2]["total"]),
+
+      @jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][2]["total"]
+    ], style: [nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][0]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][1]["total"],minus_num, align_right),nil, check_for_class(@jurnal_cash_flow_last_3_month["cash_flow"]["summary"]["closing_balance"][2]["total"],minus_num, align_right) ]
+
+    sheet.merge_cells("A1:F1")
+    sheet.add_style 'A1:E1', bold, centered
+    sheet.merge_cells("A2:F2")
+    sheet.add_style 'A2:F2', centered, sz: 20
+    sheet.merge_cells("A3:F3")
+    sheet.add_style 'A3:F3', centered
+    sheet.merge_cells("A4:F4")
+    sheet.add_style 'A4:F4', centered
+    sheet.add_style 'A5', centered
+    sheet.add_style 'B5', centered
+    sheet.add_style 'D5', centered
+    sheet.add_style 'F5', centered
+
+  end
+end

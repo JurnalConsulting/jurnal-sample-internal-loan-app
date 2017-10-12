@@ -1,0 +1,281 @@
+wb.styles do |s|
+  wb.add_worksheet(name: t('excel.profit-loss') ) do |sheet|
+    minus_num        = s.add_style :fg_color => "ff0000",:alignment=>{:horizontal=>:right}
+    align_right      = s.add_style :alignment=>{:horizontal=>:right}
+    two_dec_digits   = s.add_style :format_code => "#,##0.00", :alignment=>{:horizontal=>:right}
+    two_dec_digits_minus = s.add_style :format_code => "#,##0.00", :alignment=>{:horizontal=>:right}, :fg_color => "ff0000"
+
+    bold             = { b: true }
+    centered         = { alignment: { horizontal: :center } }
+
+    sheet.add_row [
+      @jurnal_company_data["company"]["name"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      t('excel.profit-loss'),
+      "","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["report_date"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["currency_format"],
+      "","","","",""
+    ]
+    sheet.add_row [
+      t('excel.date'),
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][0]["period"],
+      "",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][1]["period"],
+      "",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][2]["period"]
+    ]
+    sheet.add_row [
+      t('excel.title-primary-income')
+    ]
+
+    sheet.add_row [
+      t('excel.primary-income')
+    ]
+    @jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [nil,check_for_class(c["data"][0]["balance"],minus_num, align_right),nil,check_for_class(c["data"][1]["balance"],minus_num, align_right),nil,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.primary-income')}",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][0]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][1]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][1]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][1]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][2]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["primary_income"]["total"][2]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.cost-sales')
+    ]
+    @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [nil,check_for_class(c["data"][0]["balance"],minus_num, align_right),nil,check_for_class(c["data"][1]["balance"],minus_num, align_right),nil,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.cost-sales')}",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][0]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][1]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][1]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][1]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][2]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["total"][2]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.gross-profit'),
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][0]["total"],
+
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][0]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][1]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][1]["total"],
+
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][1]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][2]["total"]),
+      
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["cost_of_good_sold"]["gross_profit"][2]["total"],minus_num, align_right) ]
+
+
+    sheet.add_row [
+      t('excel.operational-expense')
+    ] 
+    @jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [nil,check_for_class(c["data"][0]["balance"],minus_num, align_right),nil,check_for_class(c["data"][1]["balance"],minus_num, align_right),nil,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.operational-expense')}",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][0]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][1]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][1]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][1]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][2]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["expense"]["total"][2]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.net-operate-income'),
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][0]["income"],
+
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][0]["income"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][1]["income"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][1]["income"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][1]["income"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][2]["income"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][2]["income"]
+    ], style: [nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][0]["income"], minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][1]["income"], minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_operating_income"][2]["income"],minus_num, align_right) ]
+
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.other-income')
+    ]
+    @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [nil,check_for_class(c["data"][0]["balance"],minus_num, align_right),nil,check_for_class(c["data"][1]["balance"],minus_num, align_right),nil,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.other-income')}",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][0]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][1]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][1]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][1]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][2]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_income"]["total"][2]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.other-expense')
+    ]
+    @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["accounts"]["array"].each do |c|
+      sheet.add_row(
+        [
+          if(c["indent"]==0)
+            c["category"]["name"]
+          else
+            ("  " * c["indent"]).to_s + c["category"]["name"].to_s
+          end ,
+          c["data"][0]["balance"],
+          check_percent_diff(c["data"][0]["balance"],c["data"][1]["balance"]),
+          c["data"][1]["balance"],
+          check_percent_diff(c["data"][1]["balance"],c["data"][2]["balance"]),
+          c["data"][2]["balance"]
+        ], style: [nil,check_for_class(c["data"][0]["balance"],minus_num, align_right),nil,check_for_class(c["data"][1]["balance"],minus_num, align_right),nil,check_for_class(c["data"][2]["balance"],minus_num, align_right)]
+      )
+    end
+    sheet.add_row [
+      "#{t('excel.total')} #{t('excel.other-expense')}",
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][0]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][0]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][1]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][1]["total"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][1]["total"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][2]["total"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][2]["total"]
+    ], style: [ nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][0]["total"],minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][1]["total"],minus_num, align_right), nil , check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["other_expense"]["total"][2]["total"],minus_num, align_right) ]
+    
+    sheet.add_row
+
+    sheet.add_row [
+      t('excel.net-income'),
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][0]["income"],
+
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][0]["income"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][1]["income"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][1]["income"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][1]["income"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][2]["income"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][2]["income"]
+    ], style: [nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][0]["income"], minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][1]["income"], minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["net_income"][2]["income"],minus_num, align_right) ]
+
+    sheet.add_row
+    sheet.add_row [
+      t('excel.net-total'),
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][0]["income"],
+
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][0]["income"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][1]["income"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][1]["income"],
+      
+      check_percent_diff(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][1]["income"], @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][2]["income"]),
+
+      @jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][2]["income"]
+    ], style: [nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][0]["income"], minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][1]["income"], minus_num, align_right), nil, check_for_class(@jurnal_profit_loss_last_3_month["profit_and_loss"]["header"]["total_comprehensive_income"][2]["income"],minus_num, align_right) ]
+
+    sheet.merge_cells("A1:F1")
+    sheet.add_style 'A1:E1', bold, centered
+    sheet.merge_cells("A2:F2")
+    sheet.add_style 'A2:F2', centered, sz: 20
+    sheet.merge_cells("A3:F3")
+    sheet.add_style 'A3:F3', centered
+    sheet.merge_cells("A4:F4")
+    sheet.add_style 'A4:F4', centered
+    sheet.add_style 'A5', centered
+    sheet.add_style 'B5', centered
+    sheet.add_style 'D5', centered
+    sheet.add_style 'F5', centered
+
+  end
+end

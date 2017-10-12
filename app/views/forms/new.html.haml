@@ -1,0 +1,11 @@
+.container-fluid{:id=>"form_new"}
+  .wrapper
+    .row{:class=>"row_header"}
+      .col-sm-12.col-md-6.left-side
+        .title
+          = t('form.info.title')
+      .col-sm-12.col-md-6.right-side
+        %a{:class =>"draft_btn_dummy"}
+          = t('form.button.cancel').html_safe
+    .row{:class=>"row_content"}
+      = render 'form'

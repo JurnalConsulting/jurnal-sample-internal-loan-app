@@ -1,0 +1,84 @@
+wb.styles do |s|
+  row_header        = s.add_style :b=>true, :alignment=>{:horizontal=>:center}, :wrap_text=>true, :height=>20, :sz=>16,:border => { :style => :medium, :color =>"000000"}
+
+  row_value         = s.add_style :alignment=>{:horizontal=>:left}, :wrap_text=>true, :height=>20, :sz=>12,:border => { :style => :thin, :color =>"000000"}
+
+  wb.add_worksheet(name: t('excel.form')) do |sheet|  
+    sheet.add_row [
+      t('form.info.form-1'),
+      ""
+    ],:style=>row_header
+    sheet.add_row [
+      t('form.label.name'),
+      "#{@form.form_title}. #{@form.form_name}"
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.address'),
+      @form.form_address
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.city'),
+      @form.form_city
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.telephone'),
+      @form.form_telephone
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.email'),
+      @form.form_email
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.buss_dur'),
+      @form.form_bussiness_duration
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.buss_type'),
+      @form.form_bussiness_type
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.loan_amount'),
+      @form.form_loan_amount
+    ],:style=>row_value
+
+    sheet.add_row
+
+    sheet.add_row [
+      "#{t('form.info.form-2')}",
+      ""
+    ],:style=>row_header
+    sheet.add_row [
+      t('form.label.name'),
+      "#{@form.form_friend_title}. #{@form.form_friend_name}"
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.address'),
+      @form.form_friend_address
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.city'),
+      @form.form_friend_city
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.telephone'),
+      @form.form_friend_telephone
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.mobilephone'),
+      @form.form_friend_handphone
+    ],:style=>row_value
+    sheet.add_row [
+      t('form.label.email'),
+      @form.form_friend_email
+    ],:style=>row_value
+
+    sheet.merge_cells("A1:B1")
+    sheet["A1:B1"].each { |c| c.color = "000000"}
+
+    sheet.merge_cells("A12:B12")
+    sheet["A12:B12"].each { |c| c.color = "000000"}
+
+    sheet.column_info.first.width = 20
+    sheet.column_info.last.width = 40
+  end
+end

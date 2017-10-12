@@ -1,0 +1,26 @@
+.container-fluid{:id=>"page_home"}
+  .wrapper
+    .row{:class=>"row_mobile"}
+      .col-xs-12
+        - if @submitted.blank? && @drafts.blank?
+        - elsif @submitted.exists? || @drafts.exists?
+          = link_to t('button.new_app'), new_form_path, :class => "btn plus_sm", "data-turbolinks"=>"false", data: { disable_with: t('form.button.loading') }
+    .row{:class=>"row_content"}
+      .left_side{:class=>"row_img"}
+        = image_tag "Loan_Banner.png", :class=>"img-responsive"
+      .right_side{:class=>"row_tab"}
+        %ul{:class=>"nav nav-tabs"}
+          %li{:class=>"nav-item #{current_page?(root_path)? 'active' : ''}"}
+            %a{"data-toggle"=>"tab", :href=>"#draft_tab"}
+              Draft
+          %li{:class=>"nav-item #{current_page?(submitted_tab_path)? 'in active' : ''}"}
+            %a{"data-toggle"=>"tab", :href=>"#submitted_tab"}
+              Submitted
+          - if @submitted.blank? && @drafts.blank?
+          - elsif @submitted.exists? || @drafts.exists?
+            = link_to t('button.new_app'), new_form_path, :class => "btn btn-primary plus_lg", "data-turbolinks"=>"false", :style=>"position:absolute; right:15px", data: { disable_with: t('form.button.loading') }
+        %div{:class=>"tab-content"}
+          %div{:id=>"draft_tab", :class=>"tab-pane fade #{current_page?(root_path)? 'in active' : ''}"}
+            = render 'forms/draft', :controller => "forms"
+          %div{:id=>"submitted_tab", :class=>"tab-pane fade #{current_page?(submitted_tab_path)? 'in active' : ''}"}
+            = render 'forms/submitted'

@@ -1,0 +1,27 @@
+// ==========================================
+// Webfonts
+// ==========================================
+// Font Stacks
+@font-face {
+  font-family: "Roboto-Light";
+  src: font-files('Roboto-Light.ttf');
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  src: font-files('Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: "Roboto-Medium";
+  src: font-files('Roboto-Medium.ttf');
+}
+@font-face {
+  font-family: "Roboto-Bold";
+  src: font-files('Roboto-Bold.ttf');
+}
+
+// Font Weights
+
+$font-family--light   : 'Roboto-Light',sans-serif;
+$font-family--book    : 'Roboto-Regular',sans-serif;
+$font-family--medium  : 'Roboto-Medium', sans-serif;
+$font-family--bold    : 'Roboto-Bold', sans-serif;

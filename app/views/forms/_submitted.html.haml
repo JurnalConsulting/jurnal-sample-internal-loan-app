@@ -1,0 +1,42 @@
+%table.table#form_submitted
+  %thead
+    %tr
+      %th
+        =t('submitted.number')
+      %th
+        =t('submitted.app')
+        = image_tag("arrow_both.png" , :class => "sort_both")
+        = image_tag("arrow_down.png" , :class => "sort_desc hidden")
+        = image_tag("arrow_up.png" , :class => "sort_asc hidden")
+      %th
+        =t('submitted.last_submitted')
+        = image_tag("arrow_both.png" , :class => "sort_both")
+        = image_tag("arrow_down.png" , :class => "sort_desc hidden")
+        = image_tag("arrow_up.png" , :class => "sort_asc hidden")
+      %th
+        =t('submitted.name')
+        = image_tag("arrow_both.png" , :class => "sort_both")
+        = image_tag("arrow_down.png" , :class => "sort_desc hidden")
+        = image_tag("arrow_up.png" , :class => "sort_asc hidden")
+      %th
+  %tbody
+    - if user_signed_in?
+      - if @submitted.blank?
+      - else
+        - @submitted.each_with_index do |f,index|
+          %tr
+            %th
+              
+            %th
+              = link_to "#{current_user.jurnal_id}-#{f.id}",form_path(f)
+              %br
+              .date
+                = f.updated_at.strftime('%d/%m/%Y %H:%M')
+            %th
+              = f.updated_at.strftime('%d %b %Y %H:%M')
+            %th
+              = f.form_name
+            %th
+
+- if @drafts.blank? && @submitted.blank?
+  = link_to t('button.create_new_app'), new_form_path, :class => "btn btn-primary new_form_link","data-turbolinks"=>"false"

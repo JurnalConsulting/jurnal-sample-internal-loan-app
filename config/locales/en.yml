@@ -1,0 +1,164 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  login:
+    user  : "Enter As User"
+    admin : "Enter As Admin"
+  time:
+    formats:
+      long: "%d/%m/%Y %H:%M"
+  button:
+    new_app         : "+ Credit Submission"
+    create_new_app  : "Credit Submission"
+    delete-title    : "Delete Submission"
+    delete-confirm  : "Proceed to delete this form."
+    delete          : "Delete"
+    cancel          : "Cancel"
+  draft:
+    number        : "No"
+    app           : "Application"
+    last_modified : "Last Modified"
+    name          : "Name"
+  submitted:
+    number        : "No"
+    app           : "Application"
+    last_submitted: "Date of Submission"
+    name          : "Name"
+  form:
+    info:
+      title : "Loan Funding Program E-Form"
+      app   : "Application"
+      submit: "Submitted on"
+      form-1: "Jurnal's User Information"
+      form-2: "Contact Person"
+      disclaimer: "*Disclaimer : We will send your Financial Statement within the last 3 months to Loan"
+    button: 
+      close       : "Close"
+      submit      : "Submit"
+      draft       : "Save Draft"
+      saving      : "Saving..."
+      loading     : "Loading..."
+      agree       : "Agree & Submit"
+      cancel      : "<span class='glyphicon glyphicon glyphicon-arrow-left'></span> Back to Home"
+    label:
+      title       : "Title*"
+      name        : "Name*"
+      address     : "Address*"
+      city        : "City*"
+      telephone   : "Telephone*"
+      mobilephone : "Handphone*"
+      email       : "Email*"
+      buss_dur    : "Business Duration*"
+      buss_type   : "Business Type*"
+      loan_amount : "Loan Amount*"
+    modal:
+      thankyou-1    : "Your Application has been Sent!"
+      thankyou-2    : "Thankyou for trusting in us. Your application will be forwarded to Loan and Loan team will contact you within a maximum of 1 bussiness day."
+      title-draft   : "Back to Homepage"
+      content-draft : "Do you want to save any changes to this form ?"
+      title         : "Jurnal | <span style='font-weight:700' style='font-size:21px'>Terms & Conditions of Loan’s Add-on Usage</span>"
+      content       : "You are going to use add-on feature of Bank Tabungan Pensiunan Nasional <span class='bold-text'><em>(“Loan add-on”)</em></span> that was provided through main services from PT Jurnal Consulting Indonesia <span class='bold-text'>(“We”; “Us”; “Our”; “Jurnal”). Please read these terms and conditions of  Loan’s add-on usage (“terms & Conditions”; “agreement”) carefully as they affect the rights and obligations of Customer under the Law.</span> The following Agreement will come into effect for You (“You”; “Your”; “Customer”) when you start to use Loan add-on that was provided by Jurnal.<br><br>
+
+        By using this Loan add-on, you (1) on behalf of yourself and/or the entity that you represent, agree to bound by all terms and conditions of this agreement; and (2) represent and warrant that you are expressly agree to bind yourelf to this Agreement.<br><br>
+        <span class='bold-text'>If you do not agree to these Terms& Conditions, do not access and/or use this Loan add-on. JURNAL IS entitled to stop, limit, block, and/or doing any other protection methods unilaterally to everyone that were considered not fulfilling this terms & conditions to this Loan add-on.</span><br>
+        Access to Loan add-on is restricted to Customers with accounts of Jurnal’s main Services only. You may not obtain or attempt to obtain unauthorised access to Loan add-on through any illegal/unlawful methods and/or any other ways with special usage consent from Jurnal. A breach of this provision may be an offence under the Laws and Regulations in Indonesia and/or any statutes and regulations according to the domicile of Jurnal.<br><br>
+        <span class='bold-text'>If you are under guardianship and/or legally competent regarding to any applicable laws and regulations:</span> you must obtain consent from your parent(s) or legal guardian(s) or any parties whose legally responsible for you, their acceptance of these Terms of Use and their agreement to take responsibility for:<br>
+          (i) your actions; <br>
+          (ii) any charges associated with your use of any of the Services; and <br>
+          (iii) your acceptance and compliance with these Terms of Use. <br>
+          (iv) indemnities according to the agreed dispute resolution. <br><br>
+        <span class='bold-text'>If you do not have consent from your parent(s) or legal guardian(s), you must stop using/accessing this Platform and using the Services.<br><br>
+          B. USE AND ACCESS TO Loan ADD-ON THROUGH NJURNAL’S PLATFORM
+        </span><br><br>
+        1. You agree to comply with any and all the guidelines, notices, operating rules and policies and instructions pertaining to the use of the Loan add-on feature, as well as any amendments to the aforementioned, issued by us, from time to time. We reserve the right to revise these guidelines, notices, operating rules and policies and instructions at any time and you are deemed to be aware of and bound by any changes to the foregoing upon their publication on the Jurnal’s platform.<br><br>
+        2. Restricted activities: You agree and undertake NOT to:<br>
+          (a) Impersonate any person or entity or to falsely state or otherwise misrepresent your affiliation with any person or entity;<br>
+          (b) Use the Loan add-on for illegal purposes;<br>
+          (c) Attempt to use Loan add-on that intentionally or unintentionally causing interference on the usage of Jurnal’s platform as a whole<br>
+          (e) use the Loan add-on other than in conformance with the acceptable use policies of any connected computer networks, any applicable Internet standards and any other applicable laws.<br><br>
+        3. Jurnal shall not be held liable for the validity of data that you put into when you are using Loan add-on this Jurnal’s platform. But, Jurnal hereby warrants your information confidentiality that you put into Loan add-on from every other unrelated parties.<br><br>
+        4. We reserve the right, but shall not be obliged to:<br>
+          (a) monitor, screen or otherwise control any activity conducted using Loan add-on on Jurnal’s platform. We may in our sole and absolute discretion, investigate any violation of the terms and conditions contained herein and may take any action it deems appropriate;<br>
+          (b) prevent or restrict access of any Customer to the Loan add-on;<br>
+          (c) report any activities that were suspected to be in violation of any applicable law, statute or regulation to the appropriate authorities and to co-operate with such authorities; and/or <br>
+          (d) to request any information and data from you in connection with your use of the Loan add-on at any time and to exercise our right under this paragraph if you refuse to divulge such information and/or data or if you provide or if we have reasonable grounds to suspect that you have provided inaccurate, misleading or fraudulent information and/or data.<br><br>
+          5. Your use of the Loan add-on through Jurnal’s platform is also subject to the Privacy Policy as set out at <a href='https://jurnal.id/en/privacy' target='blank'>website Jurnal.</a><br><br>
+          6. In addition to these Terms & Conditions, the use of specific aspects of the Platform and Services, more comprehensive or updated versions of the Loan add-on offered by us, may be subject to additional terms and conditions, which will apply in full force and effect. <br><br>
+          <span class='bold-text'>B. TECHNICAL ASPECT OF Loan ADD-ON USAGE</span><br><br>
+          1.You shall fill data that were required as shown on the Loan add-on to put forward your credit submission to Loan through Jurnal’s owned platform.<br><br>
+          2. After you submit the required data through Loan add-on on Jurnal’s platform, then the credit submission process will be taken over by Loan who will verify your submission and will follow-up to you regarding the credit submission that you’ve made using Loan add-on feature on Jurnal’s platform.<br><br>
+          3. Loan is the party who has authorization to decide whether your credit submission that you made using Jurnal’s Loan add-on is going to be accepted or not. Jurnal has no responsibility in any way or another regarding the acceptance or rejectin of your submitted credit submission that you’ve made using Jurnal’s Loan add-on.<br><br>
+          <span class='bold-text'>C. RELATED RIGHTS</span><br><br>
+          1. Loan has right to take any required actions according to their policies if there were any unvalid information that you gave in relation with your credit proposal submission that you made using Loan add-on on Jurnal’s platform. Jurnal will not in any way takes any liability for matter as stated in this article and every responsibilities will be held liable to you on the whole.<br><br>
+          2. Jurnal also has right to take any required actions to you if you’ve been proven taking any unlawful (illegal) actions to get access to Loan ad-on on Jurnal’s platform, whether such illegal actions have any impact to Jurnal’s system as a whole or not.<br><br>
+          3. You have right to submit a complain to Jurnal’s support team if the Loan add-on isn’t functioning as it should be, by sending an e-mail to Jurnal’s support team e-mail address, <a href='mailto:support@jurnal.id'>support@jurnal.id</a>,  or by phone to <a href='tel://+622129025471'>+622129025471</a><br><br>
+          <span class='bold-text'>D. INTELLECTUAL PROPERTY</span><br><br>
+            1. <span class='bold-text'>“Intellectual Property”</span> in this Terms & Conditions means all copyright, patents, utility innovations, trade marks and service marks, geographical indications, domain names, layout design rights, registered designs, design rights, database rights, trade or business names, rights protecting trade secrets and confidential information, rights protecting goodwill and reputation, and all other similar or corresponding proprietary rights and all applications for the same, whether presently existing or created in the future, anywhere in the world, whether registered or not, and all benefits, privileges, rights to claim, recover damages and obtain relief or other remedies for any past, current or future infringement, misappropriation or violation of any of the foregoing rights.<br><br>
+            2. The Intellectual Property in and to the platform are owned, licensed to or controlled by us, our licensors or our service providers. We reserve the right to enforce its Intellectual Property to the fullest extent of the law. Every kind of logos and trademarks related with Loan that were present on the Loan add-on are owned by PT Bank Tabungan Pensiunan Nasional as a whole.<br><br>
+            3. No part or parts of the platform (including Loan add-on) may be reproduced, reverse engineered, decompiled, disassembled, separated, altered, distributed, republished, displayed, broadcast, hyperlinked, mirrored, framed, transferred or transmitted in any manner or by any means or stored in an information retrieval system or installed on any servers, system or equipment without our prior written permission or that of the relevant copyright owners. Subject to to this Terms & Conditions, permission will only be granted to you to download, print or use the platform for personal and non-commercial uses, provided that you do not modify the platform and that we or the relevant copyright owners retain all copyright and other proprietary notices contained in the platform.<br><br>
+            4. There are nothing on this platform (including Loan add-on) and Terms & Conditoins that could be interpreted as a conforment, whether implicitly or not, ot interpreted as a license or rights to use (including for meta tag or “hot” link to another websites) every trademarks that was presented in the layanan, without any written consent from us or other applicable trademarks owner."
+  excel:
+    form           : "Program E-Form Loan"
+    balance-sheet  : "Balance Sheet"
+    date           : "Date"
+    title-assets   : "Assets"
+    current-assets : "Current Assets"
+    total          : "Total"
+    fixed-assets   : "Fixed Assets"
+    depreciate     : "Depreciation & Amortization"
+    others-asset   : "Other Assets"
+    others         : "Others"
+    liability      : "Liability"
+    liability-modal: "Liability & Equity"
+    liability-short: "Current Liability"
+    liability-long : "Long Term Liability"
+    equity         : "Equity"
+    profit-loss    : "Profit & Loss"
+    title-primary-income  : "Primary Income/Loss"
+    primary-income : "Primary Income"
+    cost-sales     : "Cost of Sales"
+    gross-profit   : "Gross Profits"
+    operational-expense : "Operational Expense"
+    net-operate-income : "Net Operating Income"
+    net-income : "Net Income"
+    net-total : "Total Comprehensive Income for the period"
+    other-income : "Other Income"
+    other-expense : "Other Expense"
+    cash-flow : "Cash Flow"
+    income : "Income"
+    operate-income: "Operating Income"
+    operate-act: "Operating Activities"
+    operate-exp: "Operating Expenses"
+    less-expense: "Less Expense"
+    non-opr: "Non Operating Activities"
+    others: "Others"
+    net-cash-move : "Net Cash Movement"
+    summary : "Summary"
+    open-balance: "Opening Balance"
+    net-cash-reval: "Net Bank Revaluation"
+    closing-balance: "Closing Balance"
+    number: "No"
+    transc: "Transaction"
+    curr: "Currency"
+    status: "Status"
+    memo: "Memo"
+    balance: "Balance Due"

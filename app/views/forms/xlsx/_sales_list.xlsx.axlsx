@@ -1,0 +1,74 @@
+wb.styles do |s|
+  wb.add_worksheet(name: 'Sales List' ) do |sheet|
+    minus_num        = s.add_style :fg_color => "ff0000",:alignment=>{:horizontal=>:right}
+    align_right      = s.add_style :alignment=>{:horizontal=>:right}
+    bold             = { b: true }
+    centered         = { alignment: { horizontal: :center } }
+
+    sheet.add_row [
+      @jurnal_company_data["company"]["name"],
+      "","","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_sales_lists_last_3_month["sales_lists"]["type"],
+      "","","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_sales_lists_last_3_month["sales_lists"]["header"]["report_date"],
+      "","","","","",""
+    ]
+    sheet.add_row [
+      @jurnal_sales_lists_last_3_month["sales_lists"]["header"]["currency"],
+      "","","","","",""
+    ]
+    sheet.add_row [
+      t('excel.date'),
+      t('excel.transc'),
+      t('excel.number'),
+      t('excel.status'),
+      t('excel.memo'),
+      t('excel.total'),
+      t('excel.balance')
+    ]
+
+    if !@jurnal_sales_lists_last_3_month["sales_lists"]["transactions"].blank?
+      @jurnal_sales_lists_last_3_month["sales_lists"]["transactions"].each do |c|
+        sheet.add_row [
+          c["transaction_date"],
+          c["transaction_type"],
+          c["customer"]["id"],
+          c["status"],
+          c["memo"],
+          c["total"],
+          c["balance_due"]
+        ], style: [nil,nil,nil,nil,nil,nil,check_for_class(c["balance_due"],minus_num, align_right)]
+      end
+
+      sheet.add_row [
+        "",
+        "",
+        "",
+        "",
+        t('excel.total'),
+        @jurnal_sales_lists_last_3_month["sales_lists"]["grand_total"]["total_amount"],
+        @jurnal_sales_lists_last_3_month["sales_lists"]["grand_total"]["total_due"]
+      ], style: [nil,nil,nil,nil,check_for_class(@jurnal_sales_lists_last_3_month["sales_lists"]["grand_total"]["total_amount"],minus_num, align_right),check_for_class(@jurnal_sales_lists_last_3_month["sales_lists"]["grand_total"]["total_due"],minus_num, align_right)]
+    end
+
+    sheet.merge_cells("A1:G1")
+    sheet.add_style 'A1:G1', bold, centered
+    sheet.merge_cells("A2:G2")
+    sheet.add_style 'A2:G2', centered, sz: 20
+    sheet.merge_cells("A3:G3")
+    sheet.add_style 'A3:G3', centered
+    sheet.merge_cells("A4:G4")
+    sheet.add_style 'A4:G4', centered
+    sheet.add_style 'A5', centered
+    sheet.add_style 'B5', centered
+    sheet.add_style 'C5', centered
+    sheet.add_style 'D5', centered
+    sheet.add_style 'E5', centered
+    sheet.add_style 'F5', centered
+    sheet.add_style 'G5', centered
+  end
+end
